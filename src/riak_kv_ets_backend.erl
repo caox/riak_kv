@@ -80,7 +80,8 @@ capabilities(_, _) ->
 %% @doc Start the ets backend
 -spec start(integer(), config()) -> {ok, state()} | {error, term()}.
 start(Partition, Config) ->
-    case catch (ets:new(Partition, [public, {write_concurrency, true}])) of
+    error_logger:info_msg("The config for ets backend  :~p~n", [Config]),
+    case catch (ets:new(partition, [public, {write_concurrency, true}])) of
         {'EXIT', Err} ->
             {error, Err};
         Tab ->
